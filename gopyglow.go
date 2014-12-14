@@ -1,57 +1,61 @@
 package main
 
 import (
-	"github.com/wjessop/go-piglow"
 	"log"
+
+	"github.com/wjessop/go-piglow"
 )
 
-func main() {
-	var p *piglow.Piglow
-	var err error
+type Glow struct {
+	p *piglow.Piglow
+}
 
-	// Create a new Piglow
-	p, err = piglow.NewPiglow()
+func (g *Glow) NewGlow() {
+	var err error
+	g.p, err = piglow.NewPiglow()
 	if err != nil {
 		log.Fatal("Couldn't create a Piglow: ", err)
 	}
+}
 
+func (g *Glow) Green(brightness uint8) {
+	g.p.SetLED(3, brightness)
+	g.p.SetLED(5, brightness)
+	g.p.SetLED(13, brightness)
+}
+
+func (g *Glow) Red(brightness uint8) {
+	g.p.SetLED(0, brightness)
+	g.p.SetLED(6, brightness)
+	g.p.SetLED(17, brightness)
+}
+
+func (g *Glow) Orange(brightness uint8) {
+	g.p.SetLED(2, brightness)
+	g.p.SetLED(8, brightness)
+	g.p.SetLED(15, brightness)
+}
+
+func (g *Glow) Blue(brightness uint8) {
+	g.p.SetLED(4, 255)
+	g.p.SetLED(14, 255)
+	g.p.SetLED(11, 255)
+}
+
+func (g *Glow) Clear() {
+	for i := 0; i < 18; i++ {
+		g.p.SetLED(int8(i), 0)
+	}
+}
+
+func main() {
 	// green(p, 100)
 	// red(p, 100)
 	// orange(p, 100)
 	// blue(p, 100)
-  clear(p)
+	clear(p)
 	err = p.Apply()
 	if err != nil { // Apply the changes
 		log.Fatal("Couldn't apply changes: ", err)
 	}
-}
-
-func green(p *piglow.Piglow, brightness uint8) {
-	p.SetLED(3, brightness)
-	p.SetLED(5, brightness)
-	p.SetLED(13, brightness)
-}
-
-func red(p *piglow.Piglow, brightness uint8) {
-	p.SetLED(0, brightness)
-	p.SetLED(6, brightness)
-	p.SetLED(17, brightness)
-}
-
-func orange(p *piglow.Piglow, brightness uint8) {
-	p.SetLED(2, brightness)
-	p.SetLED(8, brightness)
-	p.SetLED(15, brightness)
-}
-
-func blue(p *piglow.Piglow, brightness uint8) {
-  p.SetLED(4, 255)
-	p.SetLED(14, 255)
-	p.SetLED(11, 255)
-}
-
-func clear(p *piglow.Piglow) {
-  for i := 0; i < 18; i++ {
-    p.SetLED(int8(i), 0)
-  }
 }
