@@ -62,6 +62,7 @@ func (g *Glow) Clear() {
 }
 
 func main() {
-	glower := Glow.NewGlow()
+	glower := Glow{}
+	glower.NewGlow()
 	glower.Green(100)
 }
