@@ -18,6 +18,14 @@ func (g *Glow) NewGlow() {
 	}
 }
 
+func (g *Glow) TrySet() {
+	var err error
+	err = g.p.Apply()
+	if err != nil { // Apply the changes
+		log.Fatal("Couldn't apply changes: ", err)
+	}
+}
+
 func (g *Glow) Green(brightness uint8) {
 	g.p.SetLED(3, brightness)
 	g.p.SetLED(5, brightness)
@@ -49,13 +57,6 @@ func (g *Glow) Clear() {
 }
 
 func main() {
-	// green(p, 100)
-	// red(p, 100)
-	// orange(p, 100)
-	// blue(p, 100)
 	clear(p)
-	err = p.Apply()
-	if err != nil { // Apply the changes
-		log.Fatal("Couldn't apply changes: ", err)
-	}
+
 }
