@@ -21,7 +21,7 @@ func (g *Glow) NewGlow() {
 func (g *Glow) TrySet() {
 	var err error
 	err = g.p.Apply()
-	if err != nil { // Apply the changes
+	if err != nil {
 		log.Fatal("Couldn't apply changes: ", err)
 	}
 }
