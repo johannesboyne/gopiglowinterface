@@ -1,4 +1,4 @@
-package main
+package gopiglowinterface
 
 import (
 	"log"
@@ -59,10 +59,4 @@ func (g *Glow) Clear() {
 		g.p.SetLED(int8(i), 0)
 	}
 	g.TrySet()
-}
-
-func main() {
-	glower := Glow{}
-	glower.NewGlow()
-	glower.Green(100)
 }
